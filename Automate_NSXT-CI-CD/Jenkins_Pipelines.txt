@@ -1,0 +1,43 @@
+pipeline {
+    agent any
+options {
+ gitLabConnection('GitLab')
+}
+    stages {
+        stage('Gitlab Pull') {
+            steps {
+                git(
+                    url: 'http://gitlab01.saleh.miri/root/saleh-miri.git',
+                    branch: 'main', 
+                    changelog: true,
+                    poll: true
+                )
+            }
+        }
+        stage('Terraform FMT') {
+            steps {
+                sh 'terraform fmt'
+            }
+        }
+        stage('Terraform init') {
+            steps {
+                sh 'terraform init -plugin-dir=/opt/vmware/plugins/'
+            }
+        }
+        stage('Terraform Validate') {
+            steps {
+                sh 'terraform validate'
+            }
+        }
+        stage('Terraform action') {
+            steps {
+                sh 'terraform ${action} --auto-approve'
+            }
+        }
+        stage('remove tfvars') {
+            steps {
+                sh 'rm -f /var/lib/jenkins/workspace/saleh-miri/terraform.tfvars'
+            }
+        }
+    }
+}
