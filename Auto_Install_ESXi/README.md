@@ -1,58 +1,57 @@
 # ESXi8u1 Automated Installation on Baremetal
-
 This repository provides a fully automated solution for installing the ESXi8u1 operating system on HPE physical servers using iLO. With this code, you can effortlessly deploy ESXi servers by simply completing the variables and running the main playbook on your Ansible server. Say goodbye to manual installation hassles and hello to streamlined and efficient deployment!
 
+## Description
 In this code, I’m using Kickstart without PXE to do the ESXi version 8u1 installation over HPE Gen10 Baremetal and do the post configuration to set NTP and etc. 
-
 I wrote custom roles to define the main playbook, so please star this code to easily find it later.
 
+## Technologies and Tools
 ESXi installation process can be simplified by means of Kickstart Installation method This method utilizes so called Kickstart File, which describes the configuration, required setup and post installation tasks for Kickstart installation.
 Kickstart File can be placed in the remote repository, accessible via NFS, HTTP, FTP, etc…, or can be included in ISO image, which is pretty convenient to store a Kickstart File.
 
-In this tutorial we downloaded original ESXi8u1 ISO image then run one playbook file which has two block and 7 roles to mount iso in the Linux file system, modify it by adding Kickstart File (ks.cfg) and re-pack it to create custom UEFI bootable ESXi8u1 ISO image using mkisofs command.
-
-Notice: The OS disks on bare metal server must exist on the first bays on your physical servers.
-
-My original ISO which I’m using to do below steps was included grub menu modifying as “ins.ks=cdrom:/KS.CFG”
+## How it's works
+In this tutorial we downloaded original ESXi8u1 ISO image then run one playbook file which has two block and 7 roles to mount iso in the Linux file system, modify it by adding Kickstart File `ks.cfg` and re-pack it to create custom UEFI bootable ESXi8u1 ISO image using `mkisofs` command.
+🔔 Notice: The OS disks on bare metal server must exist on the first bays on your physical servers.
+My original ISO which I’m using to do below steps was included grub menu modifying as `ins.ks=cdrom:/KS.CFG`
 
 ## Why use this project?
-- Automate the VM creation and OS installation process
-- Save time and effort
-- Reduce the risk of human error
+⭐ Automate the VM creation and OS installation process
+⭐ Save time and effort
+⭐ Reduce the risk of human error
 
 ## How to use this project?
-- Clone the repository to your local machine.
-- Install Ansible on your local machine.
-- Edit the hosts file to include the IP addresses of the target servers.
-- Edit the host_vars and group_vars file to include the required input parameters such as hostname and IP address.
-- Run the playbook.
+⭐ Clone the repository to your local machine.
+⭐ Install Ansible on your local machine.
+⭐ Edit the hosts file to include the IP addresses of the target servers.
+⭐ Edit the host_vars and group_vars file to include the required input parameters such as hostname and IP address.
+⭐ Run the playbook.
 
 ## What does this project contain?
 Ansible playbook to automate the installation of ESXi 8u1 on HPE Gen10 bare metal servers
-- host_vars file to specify the IP addresses of the target servers.
-- group_vars file to specify the required input parameters in each groups such as gateway , iLO authentication and DNS IP address.
+⭐ host_vars file to specify the IP addresses of the target servers.
+⭐ group_vars file to specify the required input parameters in each groups such as gateway , iLO authentication and DNS IP address.
 
 ## Playbook Steps
-1st role: copy-iso-mount
+&#9745; 1st role: copy-iso-mount
 
 Mounting and copy cdrom items will do in this role.
 
-```bash
+````yml
 mkdir /mnt/{{ item.hostName }}
 mount -o loop -t iso9660 {{ isosrc }}/{{ src_iso_file }} /mnt/{{ item.hostName }}/
 mkdir {{ file_path }}/{{ item.hostName }}
 cp -avRf /mnt/{{ item.hostName }}/* {{ file_path }}/{{ item.hostName }}/
-```
-2nd role: vm-custome-boot
+````
+&#9745; 2nd role: vm-custome-boot
 
 In this step, I remove boot.cfg file from root and efi/boot directories, then put custom boot file to both destinations.
 
-```bash
+````yml
 rm -f /home/deploy/baremetal/{{ item.hostName }}/boot.cfg
 rm -f /home/deploy/baremetal/{{ item.hostName }}/efi/boot/boot.cfg
-```
+````
 
-```bash
+````yml
 copy:
           src: BOOT.CFG
           dest: /home/deploy/baremetal/{{ item.hostName }}/
@@ -60,9 +59,9 @@ copy:
           owner: root
           group: root
           mode: '0744'
-```
+````
 
-```bash
+````yml
 copy:
           src: BOOT.CFG
           dest: /home/deploy/baremetal/{{ item.hostName }}/efi/boot/
@@ -70,13 +69,13 @@ copy:
           owner: root
           group: root
           mode: '0744'
-```
+````
 
-3rd role: vm-ks
+&#9745; 3rd role: vm-ks
 
 In this step the Kickstart content for each host will be create and after that I set some esxi post configuration in this file. For example disable IPv6, set ntp service up and run, set secondary dns ip address will do here. 
 
-```bash
+````yml
   copy:
           force: yes
           dest: /home/deploy/baremetal/{{ item.hostName }}/KS.CFG
@@ -99,13 +98,13 @@ In this step the Kickstart content for each host will be create and after that I
                   esxcli system ntp start
                   #esxcli system settings advanced set -o /UserVars/HostClientCEIPEnabled -i 0
                   reboot
-```
+````
 
-4th role: vm-gen-iso
+&#9745; 4th role: vm-gen-iso
 
 Using mkisofs command to create an ISO and put on the specific path which can located by nginx webserver.
 
-```bash
+````yml
   shell: >
           mkisofs
           -o {{ iso_path }}/{{ item.hostName }}.iso
@@ -122,28 +121,29 @@ Using mkisofs command to create an ISO and put on the specific path which can lo
           -boot-load-size 1
           -no-emul-boot
           "{{ file_path }}"/{{ item.hostName }}/
-```
-5th role: iso-uefi
+````
+&#9745; 5th role: iso-uefi
 
 Using isohybrid command to force iso to be compatible with uefi and bios methods. 
 
-```bash
+````yml
 sudo isohybrid --uefi {{ iso_path }}/{{ item.hostName }}.iso
-```
-6th role: clean-stage
+````
+
+&#9745; 6th role: clean-stage
 
 Clear the stage and delete unnecessary files except created ISO files. 
 
-```bash
+````yml
 sudo umount /mnt/{{ item.hostName }}
 sudo rm -rf {{ file_path }}/{{ item.hostName }}
 sudo rm -rf /mnt/*
-```
-7th role: ilo-provisioning
+````
+&#9745; 7th role: ilo-provisioning
 
 Using group_vars to authenticate to HPE iLO and use nginx webserver path to mount related ISO to the iLO media.
 
-```bash
+````yml
   hpilo_boot:
           host: "{{ item.ilo_ip }}"
           login: "{{ ilo_user }}"
@@ -152,29 +152,32 @@ Using group_vars to authenticate to HPE iLO and use nginx webserver path to moun
           media: cdrom
           image: http://salehmiri.com:443/{{ item.hostName }}.iso
   delegate_to: localhost
-```
+````
 
 ## Run Playbook
 
 Run below command to execute playbook.
 
-```bash
+````
 ansible-playbook 00.ilo_iso_esxi.yaml
-```
+````
 
 ## Requirements
 
 Before using this automation code, make sure you have the following:
 
-- An Ansible server with Ansible installed. If you don't have Ansible installed, refer to the official [Ansible Installation Guide](https://docs.ansible.com/ansible/latest/installation_guide/index.html).
+🟪 An Ansible server with Ansible installed. If you don't have Ansible installed, refer to the official [Ansible Installation Guide](https://docs.ansible.com/ansible/latest/installation_guide/index.html).
 
-- Access to HPE servers with iLO functionality. Ensure that you have the necessary credentials and network connectivity to interact with the iLO interface.
+🟪 Access to HPE servers with iLO functionality. Ensure that you have the necessary credentials and network connectivity to interact with the iLO interface.
 
-- Familiarity with ESXi and the specific configuration requirements for your environment.
+🟪 Familiarity with ESXi and the specific configuration requirements for your environment.
 
-- Complete host_vars and group_vars properly in inventory directory.
-Host_vars
-```bash
+🟪 Complete host_vars and group_vars properly in inventory directory.
+````
+vi /etc/ansible/inventory/hosts
+````
+
+````yml
 hosts:
   - hostName: srv33.saleh.miri.local
     esxi_ip: 1.6.29.9
@@ -183,21 +186,14 @@ hosts:
   - hostName: srv34.saleh.miri.local
     esxi_ip: 1.6.29.10
     ilo_ip: 1.18.66.10
-```
+````
 
-## Customization
+# ✍️ Contribution
+I am confident that working together with skilled individuals like yourself can improve the functionality, efficiency, and overall quality of our projects. Therefore, I would be delighted to see any forks from this project. Please feel free to use this code and share any innovative ideas to enhance it further.
 
-Feel free to customize the playbook and variables according to your specific needs. You can modify network settings, storage configurations, and other parameters to align with your infrastructure requirements.
-
-## Contributing
-
-How to contribute to this project?
-
-- Fork the repository to your GitHub account.
-- Clone the forked repository to your local machine.
-- Make the necessary changes and commit them to your forked repository.
-- Create a pull request to merge your changes into the main repository.
-
+## ☎️ Contact information
+### 📧 salehmiri90@gmail.com
+### [Linkedin.com/in/salehmiri](https://www.linkedin.com/in/salehmiri)
 ## License
 
 This project is licensed under the [MIT License](LICENSE). You are free to use, modify, and distribute this automation code as per the terms of the license.
