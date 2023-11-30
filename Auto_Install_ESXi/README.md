@@ -11,24 +11,33 @@ Kickstart File can be placed in the remote repository, accessible via NFS, HTTP,
 
 ## How it's works
 In this tutorial we downloaded original ESXi8u1 ISO image then run one playbook file which has two block and 7 roles to mount iso in the Linux file system, modify it by adding Kickstart File `ks.cfg` and re-pack it to create custom UEFI bootable ESXi8u1 ISO image using `mkisofs` command.
+
 🔔 Notice: The OS disks on bare metal server must exist on the first bays on your physical servers.
+
 My original ISO which I’m using to do below steps was included grub menu modifying as `ins.ks=cdrom:/KS.CFG`
 
 ## Why use this project?
 ⭐ Automate the VM creation and OS installation process
+
 ⭐ Save time and effort
+
 ⭐ Reduce the risk of human error
 
 ## How to use this project?
 ⭐ Clone the repository to your local machine.
+
 ⭐ Install Ansible on your local machine.
+
 ⭐ Edit the hosts file to include the IP addresses of the target servers.
+
 ⭐ Edit the host_vars and group_vars file to include the required input parameters such as hostname and IP address.
+
 ⭐ Run the playbook.
 
 ## What does this project contain?
 Ansible playbook to automate the installation of ESXi 8u1 on HPE Gen10 bare metal servers
 ⭐ host_vars file to specify the IP addresses of the target servers.
+
 ⭐ group_vars file to specify the required input parameters in each groups such as gateway , iLO authentication and DNS IP address.
 
 ## Playbook Steps
@@ -194,9 +203,3 @@ I am confident that working together with skilled individuals like yourself can 
 ## ☎️ Contact information
 ### 📧 salehmiri90@gmail.com
 ### [Linkedin.com/in/salehmiri](https://www.linkedin.com/in/salehmiri)
-## License
-
-This project is licensed under the [MIT License](LICENSE). You are free to use, modify, and distribute this automation code as per the terms of the license.
-Let me know if there are any question: salehmiri90@gmail.com
-
----
