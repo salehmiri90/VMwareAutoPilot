@@ -3,7 +3,7 @@ Automate your VMware infrastructure from start to finish.
 This repository features collaborative efforts with skilled individuals to provide you with 0 to 100 automation solutions. These solutions enable you to build your VMware environment, including ESXi installation, vCenter deployment and configuration, and the addition of hosts.
 
 ## Description
-These tools and technologies help us streamline our development processes and improve efficiency. By using a combination of Infrastructure as Code (IaC) and configuration management, we can automate our VMware environment, including ESXi installation, vCenter deployment, and host addition. This allows us to focus on building and improving our applications while reducing the time spent on repetitive tasks.
+These tools and technologies help us streamline our development processes and improve efficiency. By using a combination of Infrastructure as Code (IaC) and configuration management, we can automate our VMware environment. This allows us to focus on building and improving our applications while reducing the time spent on repetitive tasks.
 
 ## Technologies and Tools
 We employed various technologies, primarily utilizing Terraform, Ansible, Nginx, GitLab, and Jenkins for the automation process.
