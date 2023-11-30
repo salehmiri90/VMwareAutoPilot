@@ -12,8 +12,6 @@ Kickstart File can be placed in the remote repository, accessible via NFS, HTTP,
 ## How it's works
 In this tutorial we downloaded original ESXi8u1 ISO image then run one playbook file which has two block and 7 roles to mount iso in the Linux file system, modify it by adding Kickstart File `ks.cfg` and re-pack it to create custom UEFI bootable ESXi8u1 ISO image using `mkisofs` command.
 
-🔔 Notice: The OS disks on bare metal server must exist on the first bays on your physical servers.
-
 My original ISO which I’m using to do below steps was included grub menu modifying as `ins.ks=cdrom:/KS.CFG`
 
 ## Why use this project?
@@ -116,7 +114,7 @@ src_iso_file: VMware-ESXi-8.0.1.iso
 ````
 cd /etc/ansible/playbooks/
 ````
-❗️ The physical HPE servers have to be powered off before execute below command.
+Notice❗️ The physical HPE servers have to be powered off before execute below command.
 
 &#9745; Then execute all parts with a single command using 
 ````
