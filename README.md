@@ -26,5 +26,5 @@ Instruction video is already uploaded to my youtube channel [salehmiri90](https:
 I am confident that working together with skilled individuals like yourself can improve the functionality, efficiency, and overall quality of our projects. Therefore, I would be delighted to see any forks from this project. Please feel free to use this code and share any innovative ideas to enhance it further.
 
 ## ☎ Contact information
-#### 📧 Email: salehmiri90@gmail.com
+#### 📧 salehmiri90@gmail.com
 #### Linkedin.com/in/salehmiri
