@@ -23,22 +23,95 @@ My original ISO which I’m using to do below steps was included grub menu modif
 
 ⭐ Reduce the risk of human error
 
-## How to use this project?
-⭐ Clone the repository to your local machine.
+### Project Requirements
+⭐ A server running the Linux operating system is required to function as the control node. (This codes had been tested on Red Hat 8.6).
 
-⭐ Install Ansible on your local machine.
+⭐ Install Ansible on your control node.
 
-⭐ Edit the hosts file to include the IP addresses of the target servers.
+⭐ Install `pyvmomi` and configure it on control node.
 
-⭐ Edit the host_vars and group_vars file to include the required input parameters such as hostname and IP address.
+⭐ Install VMware SDK for integration.
+````
+pip install git+https://github.com/vmware/vsphere-automation-sdk-python.git
+````
+⭐ Grant administrative privileges to a user on the VMware environment from the Ansible control node.
 
-⭐ Run the playbook.
+## Start to Use this code
+### Step 1: Transfer codes to you Ansible Server
+&#9745; To clone this repository from my GitHub using the command line, you can use the following command:
+````
+git clone https://github.com/salehmiri90/VMware_Automation.git
+````
 
-## What does this project contain?
-Ansible playbook to automate the installation of ESXi 8u1 on HPE Gen10 bare metal servers
-⭐ host_vars file to specify the IP addresses of the target servers.
+&#9745; Use the 'mv' command to move the contents of the cloned directory 'VMware_Automation' to '/etc/ansible' as follows: 
+````
+mv -r VMware_Automation/Auto_Install_ESXi/* /etc/ansible/
+````
 
-⭐ group_vars file to specify the required input parameters in each groups such as gateway , iLO authentication and DNS IP address.
+&#9745; Verify that the files exist in the destination path '/etc/ansible' by first changing to the directory using the 'cd' command: 
+````
+cd /etc/ansible/
+````
+And then listing the contents with the command: 
+````
+ll
+````
+&#9745; Set a hostname for your server on your control node's hosts file located in `vi /etc/hosts`. For example:
+````
+192.168.1.1  ilo-esxi
+````
+
+&#9745; Verify that the DNS name 'ilo-esxi' is properly set on your control node by attempting to ping it using the command:
+````
+ping ilo-esxi
+````
+### Step 2: Defining Hosts Variables
+&#9745; In the Ansible hosts inventory located in `vi /etc/ansible/inventory/hosts`, place the name of your server, 'ilo-esxi', under [ilo-esxi].
+````yml
+[ilo-esxi]
+ilo-esxi
+````
+&#9745; In the Ansible inventory esxi host variables located in `vi /etc/ansible/inventory/host_vars/ilo-esxi.yml`, place details about esxi hosts which you want to install OS on those.
+````yml
+hosts:
+  - hostName: srv33.saleh.miri.local
+    esxi_ip: 1.6.29.9
+    ilo_ip: 1.18.66.9
+
+  - hostName: srv34.saleh.miri.local
+    esxi_ip: 1.6.29.10
+    ilo_ip: 1.18.66.10
+````
+
+### Step 3: Defining Group Variables
+&#9745; Modify the esxi hosts and iLO authentication details in the directory `vi /etc/ansible/inventory/group_vars/ilo-esxi.yml`. In this file, update the `esxi root password`, `esxi vlan id`, `esxi netmask`, `esxi dns`, `esxi ntp`, `ilo password` and `name of iso file` parameters as I have done. 
+````yml
+root_password: 'password'
+global_vlan_id: 1146
+global_netmask: 255.255.255.0
+global_gw: 1.6.20.26
+global_dns1: 1.6.20.1
+global_dns2: 1.6.20.2
+global_ntp1: 1.6.20.4
+global_ntp2: 1.6.20.5
+
+ilo_pass: password
+
+src_iso_file: VMware-ESXi-8.0.1.iso
+````
+
+### Step 4: Running Playbooks 
+&#9745; There is only one playbook that needs to be executed.
+
+&#9745; Navigate to the playbook directory using the command:
+````
+cd /etc/ansible/playbooks/
+````
+❗️ The physical HPE servers have to be powered off before execute below command.
+Then execute all parts with a single command using 
+````
+ansible-playbook ilo_iso_esxi.yaml
+````
 
 ## Playbook Steps
 &#9745; 1st role: copy-iso-mount
