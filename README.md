@@ -11,13 +11,16 @@ We employed various technologies, primarily utilizing Terraform, Ansible, Nginx,
 ## Available Codes
 We have developed the following code snippets and are continuously working to incorporate additional solutions. The `full set of instructions` is available for this section.
 
-⭐ [Auto Installing ESXi on BareMetal](https://github.com/salehmiri90/VMware_Automation/tree/master/Auto_Install_ESXi)
-⭐ [NSXT CI/CD, Real World Scenario](https://github.com/salehmiri90/VMware_Automation/tree/master/Automate_NSXT-CI-CD)
+⭐ [Automating ESXi Installation on BareMetal with Kickstart](https://github.com/salehmiri90/VMware_Automation/tree/master/Auto_Install_ESXi)
+
+⭐ [Automating NSXT with CI/CD, Real World Scenario](https://github.com/salehmiri90/VMware_Automation/tree/master/Automate_NSXT-CI-CD)
 
 ### Video Demo on Youtube
 Instruction video is already uploaded to my youtube channel [salehmiri90](https://youtube.com/salehmiri90) and the video names are:
-&#9745; Hardening windows server using Ansible and CIS tips
-&#9745; 
+
+&#9745; `ESXi Automated Installation with Kickstart on Baremetal`
+
+&#9745; `Automating NSXT with CI/CD from zero to hero`
 
 ## Contribution
 I am confident that working together with skilled individuals like yourself can improve the functionality, efficiency, and overall quality of our projects. Therefore, I would be delighted to see any forks from this project. Please feel free to use this code and share any innovative ideas to enhance it further.
