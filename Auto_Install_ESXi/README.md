@@ -66,12 +66,18 @@ ll
 ping ilo-esxi
 ````
 ### Step 2: Defining Hosts Variables
-&#9745; In the Ansible hosts inventory located in `vi /etc/ansible/inventory/hosts`, place the name of your server, 'ilo-esxi', under [ilo-esxi].
+&#9745; In the Ansible hosts inventory located in the below path, place the name of your server, 'ilo-esxi', under [ilo-esxi].
+````
+vi /etc/ansible/inventory/hosts
+````
 ````yml
 [ilo-esxi]
 ilo-esxi
 ````
-&#9745; In the Ansible inventory esxi host variables located in `vi /etc/ansible/inventory/host_vars/ilo-esxi.yml`, place details about esxi hosts which you want to install OS on those.
+&#9745; In the Ansible inventory esxi host variables located in the below path, place details about esxi hosts which you want to install OS on those.
+````
+vi /etc/ansible/inventory/host_vars/ilo-esxi.yml
+````
 ````yml
 hosts:
   - hostName: srv33.saleh.miri.local
@@ -84,7 +90,10 @@ hosts:
 ````
 
 ### Step 3: Defining Group Variables
-&#9745; Modify the esxi hosts and iLO authentication details in the directory `vi /etc/ansible/inventory/group_vars/ilo-esxi.yml`. In this file, update the `esxi root password`, `esxi vlan id`, `esxi netmask`, `esxi dns`, `esxi ntp`, `ilo password` and `name of iso file` parameters as I have done. 
+&#9745; Modify the esxi hosts and iLO authentication details in the below directory. In this file, update the `esxi root password`, `esxi vlan id`, `esxi netmask`, `esxi dns`, `esxi ntp`, `ilo password` and `name of iso file` parameters as I have done.
+````
+vi /etc/ansible/inventory/group_vars/ilo-esxi.yml
+````
 ````yml
 root_password: 'password'
 global_vlan_id: 1146
@@ -108,7 +117,8 @@ src_iso_file: VMware-ESXi-8.0.1.iso
 cd /etc/ansible/playbooks/
 ````
 ❗️ The physical HPE servers have to be powered off before execute below command.
-Then execute all parts with a single command using 
+
+&#9745; Then execute all parts with a single command using 
 ````
 ansible-playbook ilo_iso_esxi.yaml
 ````
@@ -234,40 +244,6 @@ Using group_vars to authenticate to HPE iLO and use nginx webserver path to moun
           media: cdrom
           image: http://salehmiri.com:443/{{ item.hostName }}.iso
   delegate_to: localhost
-````
-
-## Run Playbook
-
-Run below command to execute playbook.
-
-````
-ansible-playbook 00.ilo_iso_esxi.yaml
-````
-
-## Requirements
-
-Before using this automation code, make sure you have the following:
-
-🟪 An Ansible server with Ansible installed. If you don't have Ansible installed, refer to the official [Ansible Installation Guide](https://docs.ansible.com/ansible/latest/installation_guide/index.html).
-
-🟪 Access to HPE servers with iLO functionality. Ensure that you have the necessary credentials and network connectivity to interact with the iLO interface.
-
-🟪 Familiarity with ESXi and the specific configuration requirements for your environment.
-
-🟪 Complete host_vars and group_vars properly in inventory directory.
-````
-vi /etc/ansible/inventory/hosts
-````
-
-````yml
-hosts:
-  - hostName: srv33.saleh.miri.local
-    esxi_ip: 1.6.29.9
-    ilo_ip: 1.18.66.9
-
-  - hostName: srv34.saleh.miri.local
-    esxi_ip: 1.6.29.10
-    ilo_ip: 1.18.66.10
 ````
 
 # ✍️ Contribution
