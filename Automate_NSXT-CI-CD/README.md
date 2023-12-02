@@ -53,6 +53,13 @@ This repository will help you to automate vSphere NSXT with DevOps CI/CD pipelin
 In this particular project, I wrote codes to create and modify NSXT Inventory Groups. Please take a look at Youtube video to find out.
 
 # Youtube demo
-**Follow youtube demo on the below link**
-https://youtu.be/V2aFxTqMASo
+### 🎥 Video Demo on Youtube
+Instruction video is already uploaded to my youtube channel [salehmiri90](https://youtube.com/salehmiri90) and the video names are:
+&#9745; `Automating NSXT with CD/CD from zero to hero`
 
+## ✍ Contribution
+I am confident that working together with skilled individuals like yourself can improve the functionality, efficiency, and overall quality of our projects. Therefore, I would be delighted to see any forks from this project. Please feel free to use this code and share any innovative ideas to enhance it further.
+
+## ☎ Contact information
+#### 📧 salehmiri90@gmail.com
+#### [Linkedin.com/in/salehmiri](https://www.linkedin.com/in/salehmiri)
