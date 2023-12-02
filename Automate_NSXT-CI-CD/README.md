@@ -43,23 +43,38 @@ To implement this project, I used NSXT, Gitlab, Jenkins, Terraform and Hashicorp
 
 ## Configuration Steps
 ✅ GitLab: Create a new project.
+
 ✅ Jenkins: Create a new project.
+
 ✅ Jenkins: Configure Jenkins and create a pipeline.
+
 ✅ Vault: Configuring vault and create key pairs.
+
 ✅ Create NSXT terraform configuration files on Jenkins server under `/var/lib/jenkins/workspace/project-name/` directory.
+
 ✅ Integrate GitLAB with Jenkins.
+
 ✅ Commit new changes in GitLab and check Pipeline Execution.
 
 ## Real World Execution Scenario (A to Z)
 &#9745; 1. User `Azi` as reporter will change the `terraform.tfvars` file which is located on Gitlab server.
+
 &#9745; 2. Due to `Azi` user's privilage on Gitlab, She needs to create fork from main project then edit the file.
+
 &#9745; 3. After editing the file, the `Azi` user will create a merge request to her manager.
+
 &#9745; 4. User `Ben` is the `Azi` manager and has access to merge requestes to main or master branch, he'll do it.
+
 &#9745; 5. After forked requestes merged to the main/master branch, the Gitlab is triggered Jenkins project pipelines.
+
 &#9745; 6. In Jenkins pipeline, the git project get cloned to Jenkins project-name workspace. Actually the `terraform.tfvars` file will download.
+
 &#9745; 7. After that, Terraform connected to Vault and get host,username and password variables .
+
 &#9745; 8. Continue to Jenkins pipeline, terraform format and validate will run.
+
 &#9745; 9. The main important part which is run after abow steps is terraform action with auto approve that apply changes on NSXT.
+
 &#9745; 10. At the end, the terraform.tfvars" file will delete from project workspace and ready for next run.
 
 **That's All, Have fun!** 
