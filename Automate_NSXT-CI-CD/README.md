@@ -1,8 +1,27 @@
 # NSXT-CI-CD
-This repository will help you to automate vSphere NSXT with DevOps CI/CD pipelines.
+## Description
+This repository will help you to automate vSphere NSXT with DevOps CI/CD pipelines and help you to create same pipelines from other possible requirements on NSXT.
 
-# Requirements
+## 🎥 Video Demo on Youtube
+Instruction video is already uploaded to my youtube channel [salehmiri90](https://youtube.com/salehmiri90) and the video names are:
+
+&#9745; `Automating NSXT with CD/CD from zero to hero`
+
+## Technologies and Tools
+To implement this project, I used NSXT, Gitlab, Jenkins, Terraform and Hashicorp Vault and the URLs are as below.
+✅ Gitlab `https://gitlab01.saleh.miri`
+
+✅ Jenkins `https://jenkins01.saleh.miri:8080`
+
+✅ Vault `https://jenkins01.saleh.miri:8200`
+
+✅ Terraform runs on jenkins server.
+
+✅ NSXT `https://nsxt.vi.saleh.miri`
+
+## Project Requirements
 **Must-Have:**
+
 1. End-User should be able to self-service Network and Security Services (Routing, Load Balancing, Security Groups, Security Policies, etc.) with minimal or no intervention from the NSX Administrator.
 2. The End User should not be able to harm the system ( like removing NSX from a cluster…..)
 3. One End-user should not be able to alter other end-users configurations
@@ -14,15 +33,6 @@ This repository will help you to automate vSphere NSXT with DevOps CI/CD pipelin
 
 # Solution Components
 1. The NSXT Admin prepared major devops infrastructure components include Gitlab, Jenkins, Terraform and vault.
-
-    A. Gitlab: https://gitlab01.saleh.miri
-
-    B. Jenkins: https://jenkins01.saleh.miri:8080
-  
-    C. Vault: https://jenkins01.saleh.miri:8200
-  
-    D. Terraform: runs on jenkins server
-
 3. Configuring Gitlab and prepare user privillages to commit on master/main branch.
 4. Configuring Jenkins to trigger by Gitlab commits.
 
@@ -51,12 +61,6 @@ This repository will help you to automate vSphere NSXT with DevOps CI/CD pipelin
 
 # What will happen next?
 In this particular project, I wrote codes to create and modify NSXT Inventory Groups. Please take a look at Youtube video to find out.
-
-# Youtube demo
-### 🎥 Video Demo on Youtube
-Instruction video is already uploaded to my youtube channel [salehmiri90](https://youtube.com/salehmiri90) and the video names are:
-
-&#9745; `Automating NSXT with CD/CD from zero to hero`
 
 ## ✍ Contribution
 I am confident that working together with skilled individuals like yourself can improve the functionality, efficiency, and overall quality of our projects. Therefore, I would be delighted to see any forks from this project. Please feel free to use this code and share any innovative ideas to enhance it further.
