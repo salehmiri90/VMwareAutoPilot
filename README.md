@@ -1,5 +1,5 @@
 # VMware Automation
-Automate your VMware infrastructure from start to finish. 
+Automate your VMware infrastructure with single touch and without human interaction from start to finish. 
 This repository features collaborative efforts with skilled individuals to provide you with 0 to 100 automation solutions. These solutions enable you to build your VMware environment, including ESXi installation, vCenter deployment and configuration, and the addition of hosts.
 
 ## Description
