@@ -1,19 +1,23 @@
 # Sinle Touch vCenter Installation
 ## Description
-This repository will help you to automate 
+This repository will help you to do single touch vCenter installation by modifying a variable file in `terraform.tfvars` and then run the code to setup your vCenter very soon. 
 
 ## 🎥 Video Demo on Youtube
-
+In near future
 
 ## Technologies and Tools
-To implement this project, I used 
+To implement this project, I only used Terraform and VMware vCenter product iso file. This method tested with vCenter 8.  
 
-✅ Gitlab `https://gitlab01.saleh.miri`
+✅ `Terraform`
 
+✅ `vCenter product iso file`
 
 ## Project Requirements
-⭐ 
+⭐ An ESXi host
 
+⭐ A linux server to run Terraform on it.
+
+⭐ Muont vCenter iso file on your linux server.
 
 ## Solution Components
 &#9745; 
