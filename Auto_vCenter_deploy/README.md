@@ -47,6 +47,10 @@ vim terraform.tfvars
 | Variable | Description | Value |
 | -------- | -------- | -------- |
 | binaries_path | Mounted iso path on linux server | /mnt/cdrom | 
+| deploy_type | Choose between `esxi` or `vcenter` | esxi |
+| esxi_hostname | The name or IP of your esxi host where vCenter needs to deploy on it | 192.168.1.100 |
+| esxi_username | root or high level user required | root |
+| esxi_password | password for esxi login | P@ssw0rd |
 
 ### Step 3: Execution
 &#9745; Format and Validate codes to download required providers
