@@ -19,11 +19,30 @@ To implement this project, I only used Terraform and VMware vCenter product iso 
 
 ⭐ Muont vCenter iso file on your linux server.
 
-## Solution Components
-&#9745; 
+## Start to Use this code
+### Step 1: Transfer codes to you Ansible Server
+&#9745; To clone this repository from my GitHub using the command line, you can use the following command:
+````
+git clone https://github.com/salehmiri90/VMware_Automation.git
+````
 
-## Configuration Steps
-✅ 
+&#9745; Use the 'cd' command to get into the contents of the cloned directory 'VMware_Automation' and this project realted directory 'Auto_vCenter_deploy' as follows: 
+````
+cd VMware_Automation/Auto_vCenter_deploy
+````
+
+&#9745; And then listing the contents with the command: 
+````
+ll
+````
+
+### Step 2: Defining Hosts Variables
+&#9745; Set a hostname for your Windows server on your control node's hosts file located in `vi /etc/hosts`. For example:
+````
+192.168.1.1  windows-template
+````
+### Step 3: Execution
+&#9745; Modify `terraform.tfvars` file and set the correct variables based on your infrastracture and environment.
 
 # ✍ Contribution
 I am confident that working together with skilled individuals like yourself can improve the functionality, efficiency, and overall quality of our projects. Therefore, I would be delighted to see any forks from this project. Please feel free to use this code and share any innovative ideas to enhance it further.
