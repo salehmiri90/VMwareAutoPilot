@@ -1,4 +1,4 @@
-# Sinle Touch vCenter Installation
+# Single Touch vCenter Installation
 ## Description
 This repository will help you to do single touch vCenter installation by modifying a variable file in `terraform.tfvars` and then run the code to setup your vCenter very soon. 
 
@@ -37,12 +37,31 @@ ll
 ````
 
 ### Step 2: Defining Hosts Variables
-&#9745; Set a hostname for your Windows server on your control node's hosts file located in `vi /etc/hosts`. For example:
-````
-192.168.1.1  windows-template
-````
-### Step 3: Execution
 &#9745; Modify `terraform.tfvars` file and set the correct variables based on your infrastracture and environment.
+````
+vim terraform.tfvars
+````
+
+&#9745; The `terraform.tfvars` content is same as below.
+````
+
+````
+
+### Step 3: Execution
+&#9745; Format and Validate codes to download required providers
+```
+terraform fmt
+terraform validate
+```
+
+&#9745; Check the changes before impact on infrastructure.
+```
+terraform plan
+```
+&#9745; Execute below Terraform command to double check plan then hit `yes` to make changes. 
+```
+terraform apply
+```
 
 # ✍ Contribution
 I am confident that working together with skilled individuals like yourself can improve the functionality, efficiency, and overall quality of our projects. Therefore, I would be delighted to see any forks from this project. Please feel free to use this code and share any innovative ideas to enhance it further.
